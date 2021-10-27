@@ -1,0 +1,21 @@
+POSTMAN POST (localhost:777/test) ={
+                "question": "Mark only fruits",
+                "A":{
+                    "name": "apple, car",
+                    "response": false
+                },
+                "B":{
+                    "name": "apple, orange",
+                    "response": true
+                },
+                "C":{
+                    "name": "helicopte",
+                    "response": false
+                },
+                "D":{
+                    "name": "Home, car",
+                    "response": false
+                }
+              }
+
+        DELETE (localhost:777/test/8) or (localhost:777/test/All)
