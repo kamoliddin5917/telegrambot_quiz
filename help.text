@@ -1,4 +1,4 @@
-POSTMAN POST (localhost:777/test) ={
+POSTMAN POST (localhost:777/test) = {
                 "question": "Mark only fruits",
                 "A":{
                     "name": "apple, car",
@@ -10,7 +10,7 @@ POSTMAN POST (localhost:777/test) ={
                 },
                 "C":{
                     "name": "helicopte",
-                    "response": false
+                    "response": false 
                 },
                 "D":{
                     "name": "Home, car",

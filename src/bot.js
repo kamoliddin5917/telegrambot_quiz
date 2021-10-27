@@ -14,33 +14,27 @@ bot.on("message", (msg) => {
   const findUser = users.find(u => u.chatId == msg.chat.id)
   
   if (msg.text === "/start") {
-    const user = {chatId: msg.chat.id, step: 0, res: 0}
-    
+    const user = {chatId: msg.chat.id, step: 0, res: 0, informations: { first_name: msg.from.first_name, user_name: msg.from.username}}
     if (findUser) {
       findUser.step = 0
+      findUser.res = 0
+      findUser.informations.first_name = msg.from.first_name
+      findUser.informations.user_name = msg.from.username
       stepsIo.write(users)
     }else{
       stepsIo.write([...users, user])
     }
-    bot.sendMessage(findUser.chatId,
-     `${findUser.step + 1}) ${tests[0].question}
-     A. ${tests[0].responses.A.name}
-     B. ${tests[0].responses.B.name}
-     C. ${tests[0].responses.C.name}
-     D. ${tests[0].responses.D.name}`,{
+    bot.sendMessage(msg.chat.id, "Assalomu Alaykum",{
       reply_markup: {
-        keyboard: [["A", "B"],["C", "D"]],
+        keyboard: [["Start the test"]],
         resize_keyboard: true,
         one_time_keyboard: true
       }
-    });
-    
-    findUser.step += 1
-    findUser.res = 0
-    stepsIo.write(users)
-  }else if((msg.text === "A" || msg.text === "B" || msg.text === "C" || msg.text === "D") && findUser.step < tests.length){
+    })
+  }else if((msg.text === "Start the test" || msg.text === "A" || msg.text === "B" || msg.text === "C" || msg.text === "D") && findUser.step < tests.length){
      
-    if (tests[findUser.step - 1].responses[msg.text].response && tests[findUser.step - 1].responses[msg.text].response !== "false") {
+    if (msg.text !== "Start the test" && tests[findUser.step - 1].responses[msg.text].response && 
+        tests[findUser.step - 1].responses[msg.text].response !== "false") {
       findUser.res += 1
       stepsIo.write(users)
     }
@@ -60,11 +54,18 @@ bot.on("message", (msg) => {
     findUser.step += 1
     stepsIo.write(users)
   }else if((msg.text === "A" || msg.text === "B" || msg.text === "C" || msg.text === "D") && findUser.step === tests.length){
-    if (tests[findUser.step - 1].responses[msg.text].response && tests[findUser.step - 1].responses[msg.text].response !== "false") {
+    if (tests[findUser.step - 1].responses[msg.text].response && 
+        tests[findUser.step - 1].responses[msg.text].response !== "false") {
       findUser.res += 1
       stepsIo.write(users)
     }
-    bot.sendMessage(findUser.chatId,`Your responses: ${tests.length}/${findUser.res}`);
+    bot.sendMessage(findUser.chatId,`Your responses: ${tests.length}/${findUser.res}`,{
+      reply_markup: {
+        keyboard: [["/start"]],
+        resize_keyboard: true,
+        one_time_keyboard: true
+      }
+    });
  
     findUser.step = 0
     stepsIo.write(users)
