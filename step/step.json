@@ -9,11 +9,20 @@
     },
     {
         "chatId": 778142352,
-        "step": 1,
+        "step": 0,
         "res": 0,
         "informations": {
             "first_name": "online",
             "user_name": "Kamoliddin_5917"
+        }
+    },
+    {
+        "chatId": 1220265250,
+        "step": 0,
+        "res": 2,
+        "informations": {
+            "first_name": "Usmon",
+            "user_name": "masudjonov"
         }
     }
 ]
